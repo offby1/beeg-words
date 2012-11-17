@@ -5,10 +5,13 @@
               android:orientation="horizontal"
               tools:context=".MainActivity" >
 
-  <EditText android:id="@+id/edit_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/edit_message"
-            android:layout_weight="1"/>
+  <EditText
+      android:id="@+id/edit_message"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:hint="@string/edit_message"
+      android:inputType="textNoSuggestions"
+      android:singleLine="true" />
 
 </LinearLayout>
