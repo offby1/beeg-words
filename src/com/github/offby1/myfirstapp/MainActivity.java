@@ -32,15 +32,14 @@ public class MainActivity extends Activity {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     // Save the text on every keystroke!
 
-                    // TODO -- I suspect I'm saving everything twice
-                    // -- once on keyDown, and again on keyUp.  Fix
-                    // that.
-                    EditText editText = (EditText) v;
-                    String   message  = editText.getText().toString();
+                    if (event.getAction() == KeyEvent.ACTION_UP) {
+                        EditText editText = (EditText) v;
+                        String   message  = editText.getText().toString();
 
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.putString("message", message);
-                    editor.commit();
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("message", message);
+                        editor.commit();
+                    }
 
                     return false;
                 }
