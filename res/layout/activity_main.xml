@@ -1,15 +1,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal"
-              tools:context=".MainActivity" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView android:text="TextView"
+        android:id="@+id/TextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </TextView>
 
   <EditText
       android:id="@+id/edit_message"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_weight="1"
+      android:layout_weight="0"
       android:hint="@string/edit_message"
       android:inputType="textNoSuggestions"
       android:singleLine="true" />
