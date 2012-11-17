@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.ShareActionProvider;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
     public final static String KEY = "com.github.offby1.myfirstapp.MESSAGE";
@@ -22,6 +23,26 @@ public class MainActivity extends Activity {
     EditText editText;
     private ShareActionProvider mShareActionProvider;
     private Intent sendIntent;
+
+    private void syncFromEditText () {
+        String   message  = editText.getText().toString();
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(KEY, message);
+        editor.commit();
+
+        if (sendIntent != null) {
+            // Update what we'll share.
+            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        }
+
+        // Update the big text view.
+        TextView tv = (TextView)findViewById(R.id.TextView1);
+        tv.setText (message);
+
+        // TODO -- change the text size to be as large as possible,
+        // while still showing the entire message.
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +55,15 @@ public class MainActivity extends Activity {
         editText = (EditText) findViewById(R.id.edit_message);
         editText.setText(message);
 
+        syncFromEditText ();
+
         editText.setOnKeyListener(new OnKeyListener() {
 
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
+
                     // Save the text on every keystroke!
-
                     if (event.getAction() == KeyEvent.ACTION_UP) {
-                        EditText editText = (EditText) v;
-                        String   message  = editText.getText().toString();
-
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(KEY, message);
-                        editor.commit();
-
-                        // Update what we'll share, while we're at it.
-                        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+                        syncFromEditText ();
                     }
 
                     return false;
@@ -71,9 +86,6 @@ public class MainActivity extends Activity {
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.setType("text/plain");
         mShareActionProvider.setShareIntent(sendIntent);
-
-        sendIntent.putExtra(Intent.EXTRA_TEXT,
-                            ((EditText) findViewById(R.id.edit_message)).getText().toString());
 
         return true;
     }
