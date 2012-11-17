@@ -11,7 +11,7 @@ import android.view.View.OnKeyListener;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
-    public final static String EXTRA_MESSAGE = "com.github.offby1.myfirstapp.MESSAGE";
+    public final static String KEY = "com.github.offby1.myfirstapp.MESSAGE";
 
     SharedPreferences sharedPref;
     EditText editText;
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
-        String message = sharedPref.getString("message", "");
+        String message = sharedPref.getString(KEY, "");
         editText = (EditText) findViewById(R.id.edit_message);
         editText.setText(message);
 
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
                         String   message  = editText.getText().toString();
 
                         SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString("message", message);
+                        editor.putString(KEY, message);
                         editor.commit();
                     }
 
