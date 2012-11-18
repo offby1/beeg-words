@@ -1,0 +1,3 @@
+Yo, readme, OK?
+
+An attempt to replicate the charming "Big Words" iOs app.
