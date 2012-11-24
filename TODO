@@ -1,2 +1,29 @@
-* An easy way to clear the entered text.  Some sorta "clear" button.
-* At each keypress, add the text to a display area, thus starting the "Big Words" project.
+#-*-org-*-
+
+* An easy way to clear the entered text.
+i.e., some sorta "clear" button.
+
+* At each keypress, add the text to a display area
+... thus starting the "Big Words" project.  Right now it's "line
+oriented": nothing changed in the display area until you click the
+"Done" button on the keyboard.
+
+http://developer.android.com/guide/topics/text/creating-input-method.html
+might be where to look if I need to write my own "Input Method
+Editor", given that the built-in keyboard seems not to deliver
+individual keypresses.
+
+http://developer.android.com/reference/android/view/inputmethod/InputConnection.html
+might also be useful; it has a "sendKeyEvent" method.
+
+* Figure out how to scale the text
+Right now the text in the display area is whatever small font size I
+chose when I created the project.
+
+This may be tricky -- to do it right, I need to figure out the size
+of the display area in pixels, the size of the _currently_ displayed
+text in pixels, compute the ratio, and then apply that scale factor
+to whatever font size is currently active.
+
+http://developer.android.com/reference/android/widget/TextView.html#attr_android:textSize
+looks like the attribute to fiddle.
