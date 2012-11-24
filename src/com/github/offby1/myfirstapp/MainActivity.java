@@ -62,6 +62,14 @@ public class MainActivity extends Activity {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                     // Save the text on every keystroke!
+
+                    // BUGBUG
+                    // http://developer.android.com/reference/android/view/KeyEvent.html
+                    // says ``the default software keyboard will never
+                    // send any key event to any application
+                    // targetting Jelly Bean or later''.  Experience
+                    // bears this out: the big text area doesn't get
+                    // updated until I hit the "Done" button.
                     if (event.getAction() == KeyEvent.ACTION_UP) {
                         syncFromEditText ();
                     }
