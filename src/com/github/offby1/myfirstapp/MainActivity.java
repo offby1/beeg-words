@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
     public final static String KEY = "com.github.offby1.myfirstapp.MESSAGE";
 
@@ -79,8 +81,19 @@ public class MainActivity extends Activity {
             });
     }
 
+    public boolean dispatchKeyEvent (KeyEvent event) {
+        // Update the big text view.
+        KeyCharacterMap map      = event.getKeyCharacterMap();
+        TextView        tv       = (TextView)findViewById(R.id.TextView1);
+        CharSequence    existing = tv.getText();
+        tv.setText (existing.toString()
+                    + map.get(event.getKeyCode(), event.getMetaState()));
+        tv.invalidate();
+        return super.dispatchKeyEvent (event);
+    }
+
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-	@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main, menu);
