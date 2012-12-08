@@ -1,4 +1,6 @@
-package com.github.offby1.myfirstapp;
+package com.github.offby1.beegwords;
+
+import com.github.offby1.beegwords.R;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -19,7 +21,7 @@ import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
-    public final static String KEY = "com.github.offby1.myfirstapp.MESSAGE";
+    public final static String KEY = "com.github.offby1.beegwords.MESSAGE";
 
     SharedPreferences sharedPref;
     EditText editText;

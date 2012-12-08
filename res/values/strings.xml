@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My First App</string>
+    <string name="app_name">Beeg Words</string>
     <string name="edit_message">The message, be entering it</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_item_share">Share</string>
