@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ShareActionProvider;
 
@@ -42,15 +44,17 @@ public class MainActivity extends Activity {
         // Update the big text view.
         FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
         tv.setText (message);
-
-        // TODO -- change the text size to be as large as possible,
-        // while still showing the entire message.
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
+
+        // Go to full-screen mode.
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         sharedPref = this.getPreferences(Context.MODE_PRIVATE);
 
