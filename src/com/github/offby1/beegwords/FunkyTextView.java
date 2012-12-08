@@ -1,13 +1,16 @@
 package com.github.offby1.beegwords;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class FunkyTextView extends View {
     String mText = "Hey you";
     Paint mTextPaint;
@@ -17,9 +20,9 @@ public class FunkyTextView extends View {
 
     public void setText (String message) {
         mText = message;
-        adjustTextSize ();
 
-        adjustTextScale ();
+        adjustTextSize ();
+        adjustTextHorizontalStretch ();
     }
 
     public CharSequence getText () {
@@ -28,23 +31,28 @@ public class FunkyTextView extends View {
 
     public FunkyTextView(Context context) {
         super (context);
-        init_text_paint ();
+        init ();
     }
 
     public FunkyTextView(Context context, AttributeSet attrs) {
         super (context, attrs);
-        init_text_paint ();
+        init ();
     }
 
     public FunkyTextView(Context context, AttributeSet attrs, int defStyle) {
         super (context, attrs, defStyle);
-        init_text_paint ();
+        init ();
     }
 
-    private void init_text_paint() {
+    private void init() {
         mTextPaint = new TextPaint();
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setAntiAlias(true);
+
+        // The prevents some letters from vanishing; it appears to
+        // work around a bug in Android.
+        // http://stackoverflow.com/questions/6253528/font-size-too-large-to-fit-in-cache
+        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     void adjustTextSize() {
@@ -72,7 +80,7 @@ public class FunkyTextView extends View {
         mTextPaint.setTextSize(size);
     }
 
-    void adjustTextScale () {
+    void adjustTextHorizontalStretch () {
         mTextPaint.setTextScaleX(1.0f);
         Rect bounds = new Rect();
         mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
@@ -99,8 +107,7 @@ public class FunkyTextView extends View {
         mViewHeight = h;
 
         adjustTextSize ();
-
-        adjustTextScale ();
+        adjustTextHorizontalStretch ();
     }
 
     @Override
