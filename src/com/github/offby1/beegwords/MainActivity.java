@@ -13,8 +13,9 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ShareActionProvider;
 
@@ -58,6 +59,8 @@ public class MainActivity extends Activity {
         editText = (EditText) findViewById(R.id.edit_message);
         editText.setText(message);
 
+        // This prevents the damned keyboard from popping up all by itself.
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         syncFromEditText ();
 
         editText.setOnKeyListener(new OnKeyListener() {
