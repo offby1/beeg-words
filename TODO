@@ -19,17 +19,6 @@ might also be useful; it has a "sendKeyEvent" method.
 http://stackoverflow.com/questions/4462045/catch-keypress-of-special-characters-with-android
 mentions "dispatchKeyEvent"
 
-* Figure out how to scale the text
-Right now the text in the display area is whatever small font size I
-chose when I created the project.
+* Prevent the keyboard from intruding
 
-    This may be tricky -- to do it right, I need to figure out the size
-    of the display area in pixels, the size of the _currently_ displayed
-    text in pixels, compute the ratio, and then apply that scale factor
-    to whatever font size is currently active.
-
-http://developer.android.com/reference/android/widget/TextView.html#attr_android:textSize
-looks like the attribute to fiddle.
-
-http://catchthecows.com/?p=72 appears to address exactly this problem.
-
+... whenever I rotate the tablet; it's annoying.
