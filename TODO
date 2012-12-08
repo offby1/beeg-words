@@ -23,10 +23,10 @@ mentions "dispatchKeyEvent"
 Right now the text in the display area is whatever small font size I
 chose when I created the project.
 
-This may be tricky -- to do it right, I need to figure out the size
-of the display area in pixels, the size of the _currently_ displayed
-text in pixels, compute the ratio, and then apply that scale factor
-to whatever font size is currently active.
+    This may be tricky -- to do it right, I need to figure out the size
+    of the display area in pixels, the size of the _currently_ displayed
+    text in pixels, compute the ratio, and then apply that scale factor
+    to whatever font size is currently active.
 
 http://developer.android.com/reference/android/widget/TextView.html#attr_android:textSize
 looks like the attribute to fiddle.
