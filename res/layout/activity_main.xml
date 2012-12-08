@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView android:text="TextView"
+    <com.github.offby1.beegwords.FunkyTextView android:text="TextView"
         android:id="@+id/TextView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +14,7 @@
         android:ems="10">
 
         <requestFocus />
-    </TextView>
+    </com.github.offby1.beegwords.FunkyTextView>
 
   <EditText
       android:id="@+id/edit_message"
