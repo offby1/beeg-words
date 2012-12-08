@@ -8,7 +8,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-public class FunkyTextView extends TextView {
+public class FunkyTextView extends View {
     String mText = "Hey you";
     Paint mTextPaint;
     int mViewWidth;
