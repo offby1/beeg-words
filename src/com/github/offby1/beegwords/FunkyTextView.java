@@ -36,25 +36,60 @@ public class FunkyTextView extends TextView {
         mTextPaint.setAntiAlias(true);
     }
 
+    void adjustTextSize() {
+        if (mText.length() == 0) {
+            return;
+        }
+        mTextPaint.setTextSize(100);
+        mTextPaint.setTextScaleX(1.0f);
+        Rect bounds = new Rect();
+        // ask the paint for the bounding rect if it were to draw this
+        // text
+        mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
+
+        // get the height that would have been produced
+        int h = bounds.bottom - bounds.top;
+
+        // make the text take up 70% of the height
+        float target = (float) mViewHeight * .7f;
+
+        // figure out what textSize setting would create that height
+        // of text
+        float size = ((target / h) * 100f);
+
+        // and set it into the paint
+        mTextPaint.setTextSize(size);
+    }
+
+    void adjustTextScale () {
+        mTextPaint.setTextScaleX(1.0f);
+        Rect bounds = new Rect();
+        mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
+
+        int w         = bounds.right  - bounds.left;
+        int text_h    = bounds.bottom - bounds.top;
+        mTextBaseline = bounds.bottom + ((mViewHeight - text_h) / 2);
+
+        float xscale = ((float) (mViewWidth - getPaddingLeft() - getPaddingRight()))
+            / w;
+
+        mTextPaint.setTextScaleX(xscale);
+    }
+
     /**
      * When the view size is changed, recalculate the paint settings to have the
      * text on the fill the view area
      */
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
         mViewWidth  = w;
         mViewHeight = h;
-        super.onSizeChanged(mViewWidth, mViewHeight, oldw, oldh);
 
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
+        adjustTextSize ();
 
-        int text_h = bounds.bottom - bounds.top;
-        mTextBaseline = bounds.bottom + ((mViewHeight - text_h) / 2);
-
-        // Not sure I need to do this every time the size changes, but
-        // that's how it's done in the project that I'm copying
-        mTextPaint.setTextScaleX(1.0f);
+        adjustTextScale ();
     }
 
     @Override
