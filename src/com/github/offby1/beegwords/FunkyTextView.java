@@ -41,7 +41,9 @@ public class FunkyTextView extends TextView {
      * text on the fill the view area
      */
     @Override
-    protected void onSizeChanged(int mViewWidth, int mViewHeight, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        mViewWidth  = w;
+        mViewHeight = h;
         super.onSizeChanged(mViewWidth, mViewHeight, oldw, oldh);
 
         Rect bounds = new Rect();
@@ -49,6 +51,10 @@ public class FunkyTextView extends TextView {
 
         int text_h = bounds.bottom - bounds.top;
         mTextBaseline = bounds.bottom + ((mViewHeight - text_h) / 2);
+
+        // Not sure I need to do this every time the size changes, but
+        // that's how it's done in the project that I'm copying
+        mTextPaint.setTextScaleX(1.0f);
     }
 
     @Override
