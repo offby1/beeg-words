@@ -94,8 +94,6 @@ public class FunkyTextView extends TextView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         // draw the text
         // position is centered on width
         // and the baseline is calculated to be positioned from the
