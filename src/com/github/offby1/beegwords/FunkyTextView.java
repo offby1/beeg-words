@@ -3,6 +3,7 @@ package com.github.offby1.beegwords;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
@@ -47,11 +48,14 @@ public class FunkyTextView extends View {
         mTextPaint = new TextPaint();
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setAntiAlias(true);
+        mTextPaint.setColor (Color.WHITE);
 
         // The prevents some letters from vanishing; it appears to
         // work around a bug in Android.
         // http://stackoverflow.com/questions/6253528/font-size-too-large-to-fit-in-cache
         this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        
+        this.setBackgroundColor(Color.BLACK);
     }
 
     void adjustTextSize() {
