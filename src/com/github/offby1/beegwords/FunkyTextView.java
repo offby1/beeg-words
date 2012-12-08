@@ -22,7 +22,6 @@ public class FunkyTextView extends View {
         mText = message;
 
         adjustTextSize ();
-        adjustTextHorizontalStretch ();
     }
 
     public CharSequence getText () {
@@ -62,37 +61,27 @@ public class FunkyTextView extends View {
         mTextPaint.setTextSize(100);
         mTextPaint.setTextScaleX(1.0f);
         Rect bounds = new Rect();
+
         // ask the paint for the bounding rect if it were to draw this
         // text
         mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
 
-        // get the height that would have been produced
+        // get the height and width that would have been produced
         int h = bounds.bottom - bounds.top;
+        int w = bounds.right - bounds.left;
 
-        // make the text take up 70% of the height
-        float target = (float) mViewHeight * .7f;
+        // make the text take up 70% of the height or width, whichever is smaller
+
+        float targetH = (float) mViewHeight * .7f;
+        float targetW = (float) mViewWidth  * .9f;
 
         // figure out what textSize setting would create that height
-        // of text
-        float size = ((target / h) * 100f);
+        // or width of text
+        float sizeH = ((targetH / h) * 100f);
+        float sizeW = ((targetW / w) * 100f);
 
         // and set it into the paint
-        mTextPaint.setTextSize(size);
-    }
-
-    void adjustTextHorizontalStretch () {
-        mTextPaint.setTextScaleX(1.0f);
-        Rect bounds = new Rect();
-        mTextPaint.getTextBounds(mText, 0, mText.length(), bounds);
-
-        int w         = bounds.right  - bounds.left;
-        int text_h    = bounds.bottom - bounds.top;
-        mTextBaseline = bounds.bottom + ((mViewHeight - text_h) / 2);
-
-        float xscale = ((float) (mViewWidth - getPaddingLeft() - getPaddingRight()))
-            / w;
-
-        mTextPaint.setTextScaleX(xscale);
+        mTextPaint.setTextSize(sizeH < sizeW ? sizeH : sizeW);
     }
 
     /**
@@ -107,16 +96,13 @@ public class FunkyTextView extends View {
         mViewHeight = h;
 
         adjustTextSize ();
-        adjustTextHorizontalStretch ();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // draw the text
-        // position is centered on width
-        // and the baseline is calculated to be positioned from the
-        // view bottom
-        canvas.drawText(mText, mViewWidth / 2, mViewHeight - mTextBaseline,
+        canvas.drawText(mText,
+                        mViewWidth / 2,
+                        mViewHeight / 2 ,
                         mTextPaint);
 
     }
