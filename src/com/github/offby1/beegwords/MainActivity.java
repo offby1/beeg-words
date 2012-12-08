@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 import android.widget.EditText;
 import android.widget.ShareActionProvider;
-import android.widget.TextView;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
@@ -41,7 +40,7 @@ public class MainActivity extends Activity {
         }
 
         // Update the big text view.
-        TextView tv = (TextView)findViewById(R.id.TextView1);
+        FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
         tv.setText (message);
 
         // TODO -- change the text size to be as large as possible,
@@ -86,7 +85,7 @@ public class MainActivity extends Activity {
     public boolean dispatchKeyEvent (KeyEvent event) {
         // Update the big text view.
         KeyCharacterMap map      = event.getKeyCharacterMap();
-        TextView        tv       = (TextView)findViewById(R.id.TextView1);
+        FunkyTextView   tv       = (FunkyTextView)findViewById(R.id.TextView1);
         CharSequence    existing = tv.getText();
         tv.setText (existing.toString()
                     + map.get(event.getKeyCode(), event.getMetaState()));

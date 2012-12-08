@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.view.View;
 
 public class FunkyTextView extends View {
     String mText = "Hey you";
@@ -14,6 +14,17 @@ public class FunkyTextView extends View {
     int mViewWidth;
     int mViewHeight;
     int mTextBaseline;
+
+    public void setText (String message) {
+        mText = message;
+        adjustTextSize ();
+
+        adjustTextScale ();
+    }
+
+    public CharSequence getText () {
+        return mText;
+    }
 
     public FunkyTextView(Context context) {
         super (context);
