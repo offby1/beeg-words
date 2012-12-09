@@ -53,8 +53,11 @@ public class FunkyTextView extends View {
         // The prevents some letters from vanishing; it appears to
         // work around a bug in Android.
         // http://stackoverflow.com/questions/6253528/font-size-too-large-to-fit-in-cache
-        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-        
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB){
+            this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
         this.setBackgroundColor(Color.BLACK);
     }
 
