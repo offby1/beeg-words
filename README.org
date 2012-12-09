@@ -1,3 +1,1 @@
-Yo, readme, OK?
-
 An attempt to replicate the charming [[https://itunes.apple.com/us/app/big-words/id296290510]["Big Words"]] iOs app.
