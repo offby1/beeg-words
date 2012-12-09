@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <com.github.offby1.beegwords.FunkyTextView android:text="TextView"
+    <com.github.offby1.beegwords.FunkyTextView
         android:id="@+id/TextView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
