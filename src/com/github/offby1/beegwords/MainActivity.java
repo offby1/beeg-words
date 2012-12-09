@@ -19,7 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
         editText.setOnEditorActionListener(new OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    Toast.makeText(mainActivity, String.format ("actionId is %d", actionId), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mainActivity, String.format ("actionId is %d", actionId), Toast.LENGTH_SHORT).show();
                     boolean handled = false;
 
                     if (actionId == EditorInfo.IME_ACTION_DONE) {
