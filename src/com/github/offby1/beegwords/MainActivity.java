@@ -9,17 +9,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ShareActionProvider;
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class MainActivity extends Activity {
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
 
     SharedPreferences sharedPref;
     EditText editText;
+    MainActivity mainActivity;
     private ShareActionProvider mShareActionProvider;
     private Intent sendIntent;
 
@@ -54,6 +57,8 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
+        mainActivity = this;
+
         // Go to full-screen mode.
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -64,27 +69,6 @@ public class MainActivity extends Activity {
         editText.setText(message);
 
         syncFromEditText ();
-
-        editText.setOnKeyListener(new OnKeyListener() {
-
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                    // Save the text on every keystroke!
-
-                    // BUGBUG
-                    // http://developer.android.com/reference/android/view/KeyEvent.html
-                    // says ``the default software keyboard will never
-                    // send any key event to any application
-                    // targetting Jelly Bean or later''.  Experience
-                    // bears this out: the big text area doesn't get
-                    // updated until I hit the "Done" button.
-                    if (event.getAction() == KeyEvent.ACTION_UP) {
-                        syncFromEditText ();
-                    }
-
-                    return false;
-                }
-            });
 
         FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
         funkyText.setOnLongClickListener (new OnLongClickListener () {
@@ -98,17 +82,22 @@ public class MainActivity extends Activity {
                     return true;
                 }
             });
-    }
 
-    public boolean dispatchKeyEvent (KeyEvent event) {
-        // Update the big text view.
-        KeyCharacterMap map      = event.getKeyCharacterMap();
-        FunkyTextView   tv       = (FunkyTextView)findViewById(R.id.TextView1);
-        CharSequence    existing = tv.getText();
-        tv.setText (existing.toString()
-                    + map.get(event.getKeyCode(), event.getMetaState()));
-        tv.invalidate();
-        return super.dispatchKeyEvent (event);
+        editText.setOnEditorActionListener(new OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    Toast.makeText(mainActivity, String.format ("actionId is %d", actionId), Toast.LENGTH_SHORT).show();
+                    boolean handled = false;
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        syncFromEditText ();
+                        FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
+                        funkyText.invalidate ();
+                        handled = true;
+                    }
+                    return handled;
+                }
+            });
+
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
