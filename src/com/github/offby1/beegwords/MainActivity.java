@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -82,6 +83,19 @@ public class MainActivity extends Activity {
                     }
 
                     return false;
+                }
+            });
+
+        FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
+        funkyText.setOnLongClickListener (new OnLongClickListener () {
+                public boolean onLongClick (View v) {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, ((FunkyTextView) v).getText ());
+                    sendIntent.setType("text/plain");
+                    startActivity(sendIntent);
+
+                    return true;
                 }
             });
     }
