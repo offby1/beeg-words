@@ -28,14 +28,22 @@ public class MainActivity extends Activity {
     public final static String KEY = "com.github.offby1.beegwords.MESSAGE";
 
     EditText editText;
+    FunkyTextView funkyText;
     MainActivity mainActivity;
 
     private SharedPreferences sharedPref;
+
     private void updateBeegWords (CharSequence charSequence) {
         // Update the big text view.
         FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
         tv.setText (charSequence.toString());
         tv.invalidate ();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent (KeyEvent event) {
+        updateBeegWords(editText.getText ());
+        return super.dispatchKeyEvent(event);
     }
 
     @Override
@@ -58,7 +66,7 @@ public class MainActivity extends Activity {
         editText = (EditText) findViewById(R.id.edit_message);
         editText.setText (savedText);
 
-        FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
+        funkyText = (FunkyTextView) findViewById (R.id.TextView1);
         funkyText.setOnLongClickListener (new OnLongClickListener () {
                 @Override
                 public boolean onLongClick (View v) {
