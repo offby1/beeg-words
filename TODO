@@ -21,3 +21,8 @@ mentions "dispatchKeyEvent"
 Instead of (or in addition to) saving to the shared preference,
 somehow sync the data to the cloud, so that if I install the same app
 on another device, it sees the same text.
+
+* Fix alignment in landscape mode
+
+Try this: type ths single word "stuff." in landscape mode; at least
+on the Nexus 7 the upper bits of the fs are cut off.
