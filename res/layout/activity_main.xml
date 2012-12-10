@@ -9,19 +9,42 @@
     <com.github.offby1.beegwords.FunkyTextView
         android:id="@+id/TextView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_weight="1"
-        android:ems="10">
+        android:ems="10" >
 
         <requestFocus />
     </com.github.offby1.beegwords.FunkyTextView>
 
-  <EditText
-      android:id="@+id/edit_message"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="0"
-      android:hint="@string/edit_message"
-      android:singleLine="true" />
+    <LinearLayout
+        android:id="@+id/textAndButton"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0"
+        android:columnCount="3"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_horizontal"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/edit_message"
+            android:singleLine="true" >
+
+        </EditText>
+
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_weight="0"
+            android:text="(x)" />
+
+    </LinearLayout>
 
 </LinearLayout>

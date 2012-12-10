@@ -11,11 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
@@ -28,7 +30,7 @@ public class MainActivity extends Activity {
     EditText editText;
     MainActivity mainActivity;
 
-	private SharedPreferences sharedPref;
+    private SharedPreferences sharedPref;
     private void updateBeegWords (CharSequence charSequence) {
         // Update the big text view.
         FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
@@ -91,5 +93,14 @@ public class MainActivity extends Activity {
                 }
             });
 
+        Button button = (Button)this.findViewById(R.id.button1);
+        button.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    editText.setText("");
+                }
+
+            });
     }
 }

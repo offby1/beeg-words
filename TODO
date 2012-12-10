@@ -1,8 +1,5 @@
 #-*-org-*-
 
-* An easy way to clear the entered text.
-i.e., some sorta "clear" button.
-
 * At each keypress, add the text to a display area
 ... thus starting the "Big Words" project.  Right now it's "line
 oriented": nothing changes in the display area until you click the
@@ -18,3 +15,9 @@ might also be useful; it has a "sendKeyEvent" method.
 
 http://stackoverflow.com/questions/4462045/catch-keypress-of-special-characters-with-android
 mentions "dispatchKeyEvent"
+
+* Persist to "the cloud"
+
+Instead of (or in addition to) saving to the shared preference,
+somehow sync the data to the cloud, so that if I install the same app
+on another device, it sees the same text.
