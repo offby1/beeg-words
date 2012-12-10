@@ -1,5 +1,6 @@
 package com.github.offby1.beegwords;
 
+import com.github.offby1.beegwords.MyEditText;
 import com.github.offby1.beegwords.R;
 
 import android.annotation.TargetApi;
@@ -18,7 +19,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 //import android.widget.Toast;
@@ -27,15 +27,19 @@ import android.widget.TextView.OnEditorActionListener;
 public class MainActivity extends Activity {
     public final static String KEY = "com.github.offby1.beegwords.MESSAGE";
 
-    EditText editText;
+    MyEditText editText;
     MainActivity mainActivity;
 
     private SharedPreferences sharedPref;
-    private void updateBeegWords (CharSequence charSequence) {
-        // Update the big text view.
-        FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
+    public static void updateBeegWords (CharSequence charSequence, FunkyTextView tv) {
         tv.setText (charSequence.toString());
         tv.invalidate ();
+    }
+
+    public void updateBeegWords (CharSequence charSequence) {
+        // Update the big text view.
+        FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
+        updateBeegWords (charSequence, tv);
     }
 
     @Override
@@ -55,10 +59,12 @@ public class MainActivity extends Activity {
         String savedText = sharedPref.getString(KEY, "");
         updateBeegWords(savedText);
 
-        editText = (EditText) findViewById(R.id.edit_message);
+        FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
+        editText                = (MyEditText) findViewById(R.id.edit_message);
+
+        editText.setUpdateTarget (funkyText);
         editText.setText (savedText);
 
-        FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
         funkyText.setOnLongClickListener (new OnLongClickListener () {
                 @Override
                 public boolean onLongClick (View v) {
