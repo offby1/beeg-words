@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 
         FunkyTextView funkyText = (FunkyTextView) findViewById (R.id.TextView1);
         funkyText.setOnLongClickListener (new OnLongClickListener () {
+                @Override
                 public boolean onLongClick (View v) {
                     Intent sendIntent = new Intent();
                     sendIntent.setAction(Intent.ACTION_SEND);
