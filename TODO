@@ -18,8 +18,3 @@ might also be useful; it has a "sendKeyEvent" method.
 
 http://stackoverflow.com/questions/4462045/catch-keypress-of-special-characters-with-android
 mentions "dispatchKeyEvent"
-
-* Provide some way to access the now-hidden "share" menu
-
-Long-click on the FunkyTextView is the obvious choice.  Dunno how
-though.
