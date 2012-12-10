@@ -19,8 +19,7 @@
     <LinearLayout
         android:id="@+id/textAndButton"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_weight="0"
+        android:layout_height="wrap_content"
         android:columnCount="3"
         android:orientation="horizontal" >
 
