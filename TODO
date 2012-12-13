@@ -25,3 +25,9 @@ on another device, it sees the same text.
 
 Try this: type ths single word "stuff." in landscape mode; at least
 on the Nexus 7 the upper bits of the fs are cut off.
+
+* Fix the lone bug
+
+Put the tablet in portrait mode; enter "what what" and hit Done;
+rotate it.  You will see "what whatwhat" in the EditText (although the
+big FunkyTextView still correctly shows "what what").
