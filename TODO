@@ -1,9 +1,8 @@
 #-*-org-*-
 
 * At each keypress, add the text to a display area
-... thus starting the "Big Words" project.  Right now it's "line
-oriented": nothing changes in the display area until you click the
-"Done" button on the keyboard.
+Right now it's "line oriented": nothing changes in the display area
+until you click the "Done" button on the keyboard.
 
 http://developer.android.com/guide/topics/text/creating-input-method.html
 might be where to look if I need to write my own "Input Method
