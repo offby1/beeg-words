@@ -4,6 +4,9 @@
 Right now it's "line oriented": nothing changes in the display area
 until you click the "Done" button on the keyboard.
 
+The instructor for the 2nd-quarter Android class suggests that I want
+http://developer.android.com/reference/android/widget/TextView.html#addTextChangedListener(android.text.TextWatcher)
+
 http://developer.android.com/guide/topics/text/creating-input-method.html
 might be where to look if I need to write my own "Input Method
 Editor", given that the built-in keyboard seems not to deliver
