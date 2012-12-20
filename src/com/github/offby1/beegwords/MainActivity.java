@@ -72,20 +72,26 @@ public class MainActivity extends Activity {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                   
-                    updateBeegWords(s.toString());
+
+                    String text = s.toString ();
+
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString(KEY, text);
+                    editor.commit();
+
+                    updateBeegWords(text);
                 }
 
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count,
                                               int after) {
-                   
+
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before,
                                           int count) {
-                   
+
                 }
             });
 
