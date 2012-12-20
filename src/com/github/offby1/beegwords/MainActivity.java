@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -72,25 +74,24 @@ public class MainActivity extends Activity {
                 }
             });
 
-        editText.setOnEditorActionListener(new OnEditorActionListener() {
+        editText.addTextChangedListener(new TextWatcher(){
+
                 @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    //Toast.makeText(mainActivity, String.format ("actionId is %d", actionId), Toast.LENGTH_SHORT).show();
-                    boolean handled = false;
+                public void afterTextChanged(Editable s) {
+                    // TODO Auto-generated method stub
+                    updateBeegWords(s.toString());
+                }
 
-                    if (actionId == EditorInfo.IME_ACTION_DONE) {
-                        updateBeegWords (v.getText ());
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count,
+                                              int after) {
+                    // TODO Auto-generated method stub
+                }
 
-                        SharedPreferences.Editor editor = sharedPref.edit();
-                        editor.putString(KEY, v.getText().toString());
-                        editor.commit();
-
-                        InputMethodManager inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
-                        handled = true;
-                    }
-                    return handled;
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before,
+                                          int count) {
+                    // TODO Auto-generated method stub
                 }
             });
 
