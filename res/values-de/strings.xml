@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Big Words</string>
+    <string name="edit_message">Die Nachricht, werden Eingabe</string>
+    <string name="hello_world">Hallo Welt!</string>
+    <string name="menu_item_share">Teilen</string>
+    <string name="send_to">Who you gonna senden?</string>
+    <string name="title_activity_display_message">Meine Nachricht</string>
+
+</resources>
