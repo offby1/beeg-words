@@ -27,10 +27,10 @@ public class MainActivity extends Activity {
     MainActivity mainActivity;
 
     private SharedPreferences sharedPref;
-    private void updateBeegWords (CharSequence charSequence) {
+    private void updateBeegWords (String s) {
         // Update the big text view.
         FunkyTextView tv = (FunkyTextView)findViewById(R.id.TextView1);
-        tv.setText (charSequence.toString());
+        tv.setText (s);
         tv.invalidate ();
     }
 
