@@ -1,5 +1,8 @@
 package com.github.offby1.beegwords;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,7 +18,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+@SuppressLint("DefaultLocale")
 public class MainActivity extends FragmentActivity {
+    public final static String CURRENT_MESSAGE_KEY = "com.github.offby1.beegwords.CURRENT_MESSAGE";
+    public final static String MESSAGES_KEY_BASE   = "com.github.offby1.beegwords.MESSAGES.";
+    public final static String MESSAGE_COUNT_KEY   = "com.github.offby1.beegwords.MESSAGE_COUNT";
+
+    public static SharedPreferences sharedPref;
+
+    private static Integer mCurrentMessage = 0;
+    private static Integer mMessageCount;
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,6 +50,10 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main);
+
+        if (sharedPref == null) {
+            sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        }
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the app.
@@ -83,8 +99,12 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            Integer cMessages = sharedPref.getInt(MESSAGE_COUNT_KEY, 0);
+            if (cMessages < 1) {
+                return 1;
+            } else {
+                return cMessages;
+            }
         }
     }
 
@@ -99,6 +119,11 @@ public class MainActivity extends FragmentActivity {
          */
         public static final String ARG_SECTION_NUMBER = "section_number";
 
+        private String getSavedMessage (Integer index) {
+            String key = MESSAGES_KEY_BASE + String.format ("%4.4d", index);
+            return sharedPref.getString(key, "");
+        }
+
         public DummySectionFragment() {
         }
 
@@ -109,8 +134,20 @@ public class MainActivity extends FragmentActivity {
             // number argument value.
             TextView textView = new TextView(getActivity());
             textView.setGravity(Gravity.CENTER);
-            textView.setText(Integer.toString(getArguments().getInt(
-                                                                    ARG_SECTION_NUMBER)));
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            mCurrentMessage = getArguments().getInt(ARG_SECTION_NUMBER);
+            editor.putInt(CURRENT_MESSAGE_KEY, mCurrentMessage);
+            editor.commit();
+
+            mMessageCount = sharedPref.getInt(MESSAGE_COUNT_KEY, 0);
+
+            String savedText = "";
+            if (mCurrentMessage < mMessageCount) {
+                savedText = getSavedMessage (mCurrentMessage);
+            }
+
+            textView.setText(savedText);
             return textView;
         }
     }
