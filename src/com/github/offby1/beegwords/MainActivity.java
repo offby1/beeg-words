@@ -130,10 +130,8 @@ public class MainActivity extends FragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            // Create a new TextView and set its text to the fragment's section
-            // number argument value.
-            TextView textView = new TextView(getActivity());
-            textView.setGravity(Gravity.CENTER);
+            // Create a new FunkyTextView and set its text to the current message.
+            FunkyTextView textView = new FunkyTextView(getActivity());
 
             SharedPreferences.Editor editor = sharedPref.edit();
             mCurrentMessage = getArguments().getInt(ARG_SECTION_NUMBER);
