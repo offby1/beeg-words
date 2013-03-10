@@ -45,7 +45,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main);
 
@@ -63,7 +64,7 @@ public class MainActivity extends FragmentActivity {
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         // Go to full-screen mode.
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
@@ -129,6 +130,8 @@ public class MainActivity extends FragmentActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Create a new FunkyTextView and set its text to the current message.
+
+            View child = getLayoutInflater(savedInstanceState).inflate(R.layout.wozzit, container);
             FunkyTextView textView = new FunkyTextView(getActivity());
 
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -144,7 +147,7 @@ public class MainActivity extends FragmentActivity {
             }
 
             textView.setText(savedText);
-            return textView;
+            return child;
         }
     }
 
